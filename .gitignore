@@ -1,0 +1,7 @@
+.vscode
+build
+data/Scenes/Cache
+extern/cuNSearch
+imgui.ini
+pySPlisHSPlasH.zip
+Utilities/Version.h
