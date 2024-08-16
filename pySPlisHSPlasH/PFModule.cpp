@@ -43,7 +43,7 @@ void PFModule(py::module m_sub) {
     // ---------------------------------------
     // Class Time Step PF
     // ---------------------------------------
-    py::class_<SPH::TimeStepPF, SPH::TimeStep>(m_sub, "TimeStepPF")
+    py::class_<SPH::TimeStepPF, SPH::TimeStep, std::shared_ptr<SPH::TimeStepPF>>(m_sub, "TimeStepPF")
             .def_readwrite_static("STIFFNESS", &SPH::TimeStepPF::STIFFNESS)
             .def(py::init<>())
             .def_static("matrixVecProd", &SPH::TimeStepPF::matrixVecProd);

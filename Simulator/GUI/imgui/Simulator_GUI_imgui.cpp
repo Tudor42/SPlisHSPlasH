@@ -385,7 +385,7 @@ void Simulator_GUI_imgui::initSimulationParameterGUI()
 	Simulation *sim = Simulation::getCurrent();
 
 	imguiParameters::createParameterObjectGUI(sim);
-	imguiParameters::createParameterObjectGUI((GenParam::ParameterObject*) sim->getTimeStep());
+	imguiParameters::createParameterObjectGUI((GenParam::ParameterObject*) sim->getTimeStep().get());
 
 	// Enum for all fluid models
 	if (sim->numberOfFluidModels() > 0)

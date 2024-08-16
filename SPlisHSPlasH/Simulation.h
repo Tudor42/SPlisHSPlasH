@@ -299,7 +299,7 @@ namespace SPH
 		Real(*m_kernelFct)(const Vector3r &);
 		Vector3r(*m_gradKernelFct)(const Vector3r &r);
 		SimulationMethods m_simulationMethod;
-		TimeStep *m_timeStep;
+		std::shared_ptr<TimeStep> m_timeStep;
 		Vector3r m_gravitation;
 		Real m_particleRadius;
 		Real m_supportRadius;
@@ -383,10 +383,11 @@ namespace SPH
 
 		int getSimulationMethod() const { return static_cast<int>(m_simulationMethod); }
 		void setSimulationMethod(const int val);
+		void setTimeStep(std::shared_ptr<TimeStep> timestep);
 
 		void setSimulationMethodChangedCallback(std::function<void()> const& callBackFct);
 
-		TimeStep *getTimeStep() { return m_timeStep; }
+		std::shared_ptr<TimeStep> getTimeStep() { return m_timeStep; }
 
 		bool is2DSimulation() { return m_sim2D; }
 		bool zSortEnabled() { return m_enableZSort; }

@@ -46,6 +46,6 @@ void PCISPHModule(py::module m_sub) {
     // ---------------------------------------
     // Class Time Step PCISPH
     // ---------------------------------------
-    py::class_<SPH::TimeStepPCISPH, SPH::TimeStep>(m_sub, "TimeStepPCISPH")
+    py::class_<SPH::TimeStepPCISPH, SPH::TimeStep, std::shared_ptr<SPH::TimeStepPCISPH>>(m_sub, "TimeStepPCISPH")
             .def(py::init<>());
 }

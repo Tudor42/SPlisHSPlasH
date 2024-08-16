@@ -50,7 +50,7 @@ void ParameterObjectParser::parseParameters()
 	for (unsigned int i = 0; i < static_cast<int>(SimulationMethods::NumSimulationMethods); i++)
 	{
 		sim->setSimulationMethod(i);
-		parseParameterObject(sim->getTimeStep());
+		parseParameterObject(sim->getTimeStep().get());
 	}
 
 	// parse FluidModel

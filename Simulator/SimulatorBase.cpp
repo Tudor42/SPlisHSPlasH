@@ -524,7 +524,7 @@ void SimulatorBase::initSimulation()
 		Simulation::getCurrent()->setSimulationMethodChangedCallback([this]() { 
 			reset(); 
 			m_gui->initSimulationParameterGUI(); 
-			getSceneLoader()->readParameterObject("Configuration", Simulation::getCurrent()->getTimeStep()); 
+			getSceneLoader()->readParameterObject("Configuration", Simulation::getCurrent()->getTimeStep().get()); 
 #ifdef USE_DEBUG_TOOLS
 			getSceneLoader()->readParameterObject("Configuration", Simulation::getCurrent()->getDebugTools());
 #endif
@@ -574,7 +574,7 @@ void SimulatorBase::deferredInit()
 			if (model->getElasticityBase())
 				getSceneLoader()->readMaterialParameterObject(model->getId(), (ParameterObject*)model->getElasticityBase());
 		}
-		getSceneLoader()->readParameterObject("Configuration", Simulation::getCurrent()->getTimeStep());
+		getSceneLoader()->readParameterObject("Configuration", Simulation::getCurrent()->getTimeStep().get());
 		m_gui->initSimulationParameterGUI();
 	}
 	sim->setSimulationInitialized(true);
@@ -635,7 +635,7 @@ void SimulatorBase::readParameters()
 	m_sceneLoader->readParameterObject("Configuration", this);
 	m_sceneLoader->readParameterObject("Configuration", TimeManager::getCurrent());
 	m_sceneLoader->readParameterObject("Configuration", Simulation::getCurrent());
-	m_sceneLoader->readParameterObject("Configuration", Simulation::getCurrent()->getTimeStep());
+	m_sceneLoader->readParameterObject("Configuration", Simulation::getCurrent()->getTimeStep().get());
 #ifdef USE_DEBUG_TOOLS
 	m_sceneLoader->readParameterObject("Configuration", Simulation::getCurrent()->getDebugTools());
 #endif
@@ -674,7 +674,7 @@ void SimulatorBase::setCommandLineParameter()
 		return;
 
 	setCommandLineParameter((ParameterObject*)sim);
-	setCommandLineParameter((ParameterObject*)sim->getTimeStep());
+	setCommandLineParameter((ParameterObject*)sim->getTimeStep().get());
 #ifdef USE_DEBUG_TOOLS
 	setCommandLineParameter((ParameterObject*)sim->getDebugTools());
 #endif
@@ -1861,7 +1861,7 @@ void SimulatorBase::writeParameterState(BinaryFileWriter &binWriter)
 	writeParameterObjectState(binWriter, this);
 	writeParameterObjectState(binWriter, TimeManager::getCurrent());
 	writeParameterObjectState(binWriter, Simulation::getCurrent());
-	writeParameterObjectState(binWriter, Simulation::getCurrent()->getTimeStep());
+	writeParameterObjectState(binWriter, Simulation::getCurrent()->getTimeStep().get());
 #ifdef USE_DEBUG_TOOLS
 	writeParameterObjectState(binWriter, Simulation::getCurrent()->getDebugTools());
 #endif
@@ -1929,7 +1929,7 @@ void SimulatorBase::readParameterState(BinaryFileReader &binReader)
 	readParameterObjectState(binReader, this);
 	readParameterObjectState(binReader, TimeManager::getCurrent());
  	readParameterObjectState(binReader, Simulation::getCurrent());
- 	readParameterObjectState(binReader, Simulation::getCurrent()->getTimeStep());
+ 	readParameterObjectState(binReader, Simulation::getCurrent()->getTimeStep().get());
 #ifdef USE_DEBUG_TOOLS
 	readParameterObjectState(binReader, Simulation::getCurrent()->getDebugTools());
 #endif
@@ -2854,7 +2854,7 @@ void SimulatorBase::writeSceneFile(const std::string &fileName)
 	Simulation* sim = Simulation::getCurrent();
 	writer.writeParameterObject("Configuration", this);
 	writer.writeParameterObject("Configuration", Simulation::getCurrent());
-	writer.writeParameterObject("Configuration", Simulation::getCurrent()->getTimeStep());
+	writer.writeParameterObject("Configuration", Simulation::getCurrent()->getTimeStep().get());
 #ifdef USE_DEBUG_TOOLS
 	writer.writeParameterObject("Configuration", Simulation::getCurrent()->getDebugTools());
 #endif

@@ -32,7 +32,17 @@ void BoundaryModelModule(py::module m_sub){
             .def("addForce", overload_cast_<const Vector3f8&, const Vector3f8&, const unsigned int>()(&SPH::BoundaryModel::addForce))
 #endif
             .def("getPointVelocity", &SPH::BoundaryModel::getPointVelocity) // TODO: remove or fix
-            .def("getForceAndTorque", &SPH::BoundaryModel::getForceAndTorque) // TODO: remove or fix
+            .def("getForceAndTorque", [](SPH::BoundaryModel &self) {
+                        // Create Python accessible Eigen vectors
+                        Vector3r force;
+                        Vector3r torque;
+                        
+                        // Call the C++ method
+                        self.getForceAndTorque(force, torque);
+                        
+                        // Return as a tuple
+                        return std::make_tuple(force, torque);
+                } , "Retrieve the force and torque applied to the boundary model.") // TODO: remove or fix
             .def("clearForceAndTorque", &SPH::BoundaryModel::clearForceAndTorque);
 
     // ---------------------------------------

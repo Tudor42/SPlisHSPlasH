@@ -55,7 +55,7 @@ void IISPHModule(py::module m_sub) {
     // ---------------------------------------
     // Class Simulation Data IISPH
     // ---------------------------------------
-    py::class_<SPH::TimeStepIISPH, SPH::TimeStep>(m_sub, "TimeStepIISPH")
+    py::class_<SPH::TimeStepIISPH, SPH::TimeStep, std::shared_ptr<SPH::TimeStepIISPH>>(m_sub, "TimeStepIISPH")
             .def("getSimulationData", &SPH::TimeStepIISPH::getSimulationData)
             .def(py::init<>());
 }

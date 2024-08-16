@@ -73,6 +73,16 @@ namespace SPH
 		virtual const std::vector<Vector3r> &getVertices() const { return m_rigidBody->getGeometry().getVertexData().getVertices(); };
 		virtual const std::vector<Vector3r> &getVertexNormals() const { return m_rigidBody->getGeometry().getMesh().getVertexNormals(); };
 		virtual const std::vector<unsigned int> &getFaces() const { return m_rigidBody->getGeometry().getMesh().getFaces(); };
+	
+		void animate() 
+		{
+			const Real dt = TimeManager::getCurrent()->getTimeStepSize();
+			m_rigidBody->getPosition() += m_rigidBody->getVelocity() * dt; 
+			Quaternionr angVelQ(0.0, m_rigidBody->getAngularVelocity()[0], m_rigidBody->getAngularVelocity()[1], m_rigidBody->getAngularVelocity()[2]);
+			m_rigidBody->getRotation().coeffs() += dt * 0.5 * (angVelQ * m_rigidBody->getRotation()).coeffs();
+			m_rigidBody->getRotation().normalize();
+			updateMeshTransformation();
+		}
 	};
 }
 

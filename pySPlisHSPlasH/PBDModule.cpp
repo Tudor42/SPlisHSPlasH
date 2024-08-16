@@ -49,6 +49,7 @@ void PBDModule(py::module m) {
                 int num_vert = vertices.size();
                 return py::memoryview::from_buffer((Real*)base_ptr, { num_vert, 3 }, { sizeof(Real) * 3, sizeof(Real) }, true);
              })
+            .def("animate", &SPH::PBDRigidBody::animate)
             .def("getFaceBuffer", [](SPH::PBDRigidBody &obj) -> py::memoryview {
                 const std::vector<unsigned int>& faces = obj.getFaces();
                 unsigned int* base_ptr = const_cast<unsigned int*>(&faces[0]);

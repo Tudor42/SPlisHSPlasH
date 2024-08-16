@@ -94,7 +94,6 @@ Simulation::~Simulation ()
 	delete m_debugTools;
 #endif
 	delete m_animationFieldSystem;
-	delete m_timeStep;
 	delete m_neighborhoodSearch;
 	delete TimeManager::getCurrent();
 
@@ -530,6 +529,21 @@ void Simulation::reset()
 	TimeManager::getCurrent()->setTime(0.0);
 }
 
+void Simulation::setTimeStep(std::shared_ptr<TimeStep> timestep) {
+	if (timestep == nullptr) {
+		LOG_ERR << "Null pointer passed to setTimeStep function";
+		return;
+	}
+	m_simulationMethod = SimulationMethods::NumSimulationMethods;
+	m_timeStep = timestep;
+	m_timeStep->init();
+	setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_CUBIC);
+	setValue(Simulation::GRAD_KERNEL_METHOD, Simulation::ENUM_GRADKERNEL_CUBIC);
+	
+	if (m_simulationMethodChanged != nullptr)
+		m_simulationMethodChanged();
+}
+
 void Simulation::setSimulationMethod(const int val)
 {
 	SimulationMethods method = static_cast<SimulationMethods>(val);
@@ -539,49 +553,48 @@ void Simulation::setSimulationMethod(const int val)
 	if (method == m_simulationMethod)
 		return;
 
-	delete m_timeStep;
 	m_timeStep = nullptr;
 
 	m_simulationMethod = method;
 
 	if (method == SimulationMethods::WCSPH)
 	{
-		m_timeStep = new TimeStepWCSPH();
+		m_timeStep = std::make_shared<TimeStepWCSPH>();
 		m_timeStep->init();
 		setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_CUBIC);
 		setValue(Simulation::GRAD_KERNEL_METHOD, Simulation::ENUM_GRADKERNEL_CUBIC);
 	}
 	else if (method == SimulationMethods::PCISPH)
 	{
-		m_timeStep = new TimeStepPCISPH();
+		m_timeStep = std::make_shared<TimeStepPCISPH>();
 		m_timeStep->init();
 		setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_CUBIC);
 		setValue(Simulation::GRAD_KERNEL_METHOD, Simulation::ENUM_GRADKERNEL_CUBIC);
 	}
 	else if (method == SimulationMethods::PBF)
 	{
-		m_timeStep = new TimeStepPBF();
+		m_timeStep = std::make_shared<TimeStepPBF>();
 		m_timeStep->init();
 		setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_POLY6);
 		setValue(Simulation::GRAD_KERNEL_METHOD, Simulation::ENUM_GRADKERNEL_SPIKY);
 	}
 	else if (method == SimulationMethods::IISPH)
 	{
-		m_timeStep = new TimeStepIISPH();
+		m_timeStep = std::make_shared<TimeStepIISPH>();
 		m_timeStep->init();
 		setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_CUBIC);
 		setValue(Simulation::GRAD_KERNEL_METHOD, Simulation::ENUM_GRADKERNEL_CUBIC);
 	}
 	else if (method == SimulationMethods::DFSPH)
 	{
-		m_timeStep = new TimeStepDFSPH();
+		m_timeStep = std::make_shared<TimeStepDFSPH>();
 		m_timeStep->init();
 		setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_PRECOMPUTED_CUBIC);
 		setValue(Simulation::GRAD_KERNEL_METHOD, Simulation::ENUM_GRADKERNEL_PRECOMPUTED_CUBIC);
 	}
 	else if (method == SimulationMethods::PF)
 	{
-		m_timeStep = new TimeStepPF();
+		m_timeStep = std::make_shared<TimeStepPF>();
 		m_timeStep->init();
 
 		setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_PRECOMPUTED_CUBIC);
@@ -589,7 +602,7 @@ void Simulation::setSimulationMethod(const int val)
 	}
 	else if (method == SimulationMethods::ICSPH)
 	{
-		m_timeStep = new TimeStepICSPH();
+		m_timeStep = std::make_shared<TimeStepICSPH>();
 		m_timeStep->init();
 		setValue(Simulation::KERNEL_METHOD, Simulation::ENUM_KERNEL_CUBIC);
 		setValue(Simulation::GRAD_KERNEL_METHOD, Simulation::ENUM_GRADKERNEL_CUBIC);
@@ -598,8 +611,6 @@ void Simulation::setSimulationMethod(const int val)
 	if (m_simulationMethodChanged != nullptr)
 		m_simulationMethodChanged();
 }
-
-
 
 void Simulation::performNeighborhoodSearch()
 {

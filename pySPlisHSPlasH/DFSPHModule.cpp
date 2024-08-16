@@ -46,7 +46,7 @@ void DFSPHModule(py::module m_sub) {
     // ---------------------------------------
     // Class Time Step DFSPH
     // ---------------------------------------
-    py::class_<SPH::TimeStepDFSPH, SPH::TimeStep>(m_sub, "TimeStepDFSPH")
+    py::class_<SPH::TimeStepDFSPH, SPH::TimeStep, std::shared_ptr<SPH::TimeStepDFSPH>>(m_sub, "TimeStepDFSPH")
             .def_readwrite_static("SOLVER_ITERATIONS_V", &SPH::TimeStepDFSPH::SOLVER_ITERATIONS_V)
             .def_readwrite_static("MAX_ITERATIONS_V", &SPH::TimeStepDFSPH::MAX_ITERATIONS_V)
             .def_readwrite_static("MAX_ERROR_V", &SPH::TimeStepDFSPH::MAX_ERROR_V)

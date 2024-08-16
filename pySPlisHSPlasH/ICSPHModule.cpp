@@ -44,7 +44,7 @@ void ICSPHModule(py::module m_sub) {
     // ---------------------------------------
     // Class Simulation Data ICSPH
     // ---------------------------------------
-    py::class_<SPH::TimeStepICSPH, SPH::TimeStep>(m_sub, "TimeStepICSPH")
+    py::class_<SPH::TimeStepICSPH, SPH::TimeStep, std::shared_ptr<SPH::TimeStepICSPH>>(m_sub, "TimeStepICSPH")
             .def_readwrite_static("LAMBDA", &SPH::TimeStepICSPH::LAMBDA)
             .def_readwrite_static("PRESSURE_CLAMPING", &SPH::TimeStepICSPH::PRESSURE_CLAMPING)
             .def("getSimulationData", &SPH::TimeStepICSPH::getSimulationData)

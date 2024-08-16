@@ -35,8 +35,8 @@ void py_init_simulator(SPH::SimulatorBase& obj,
                        std::string outputDir = "",
                        bool initialPause = true,
                        bool useGui = true, 
-					   float stopAt = -1.0f, 
-					   std::string param="")
+                                           float stopAt = -1.0f, 
+                                           std::string param="")
                        {
                            std::vector<std::string> argv;
                            argv.push_back(programName);
@@ -92,7 +92,7 @@ void SimulationModule(py::module m_sub){
             .def_readwrite_static("GRAVITATION", &SPH::Simulation::GRAVITATION)
             .def_readwrite_static("CFL_METHOD", &SPH::Simulation::CFL_METHOD)
             .def_readwrite_static("CFL_FACTOR", &SPH::Simulation::CFL_FACTOR)
-			.def_readwrite_static("CFL_MIN_TIMESTEPSIZE", &SPH::Simulation::CFL_MIN_TIMESTEPSIZE)
+            .def_readwrite_static("CFL_MIN_TIMESTEPSIZE", &SPH::Simulation::CFL_MIN_TIMESTEPSIZE)
             .def_readwrite_static("CFL_MAX_TIMESTEPSIZE", &SPH::Simulation::CFL_MAX_TIMESTEPSIZE)
             .def_readwrite_static("ENABLE_Z_SORT", &SPH::Simulation::ENABLE_Z_SORT)
 
@@ -168,7 +168,7 @@ void SimulationModule(py::module m_sub){
             .def("W_zero", &SPH::Simulation::W_zero)
             .def("W", &SPH::Simulation::W)
             .def("gradW", &SPH::Simulation::gradW)
-
+            .def("setTimeStep", &SPH::Simulation::setTimeStep)
             .def("getSimulationMethod", &SPH::Simulation::getSimulationMethod)
             .def("setSimulationMethod", &SPH::Simulation::setSimulationMethod)
             .def("setSimulationMethodChangedCallback", &SPH::Simulation::setSimulationMethodChangedCallback)
@@ -337,7 +337,7 @@ void SimulationModule(py::module m_sub){
 
             .def("activateExporter", &SPH::SimulatorBase::activateExporter)
 
-			.def("setTimeStepCB", &SPH::SimulatorBase::setTimeStepCB)
+                        .def("setTimeStepCB", &SPH::SimulatorBase::setTimeStepCB)
             .def("setResetCB", &SPH::SimulatorBase::setResetCB);
 
      // ---------------------------------------

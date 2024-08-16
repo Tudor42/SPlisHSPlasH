@@ -50,7 +50,7 @@ void PBFModule(py::module m_sub) {
     // ---------------------------------------
     // Class Time Step PBF
     // ---------------------------------------
-    py::class_<SPH::TimeStepPBF, SPH::TimeStep>(m_sub, "TimeStepPBF")
+    py::class_<SPH::TimeStepPBF, SPH::TimeStep, std::shared_ptr<SPH::TimeStepPBF>>(m_sub, "TimeStepPBF")
             .def_readwrite_static("VELOCITY_UPDATE_METHOD", &SPH::TimeStepPBF::VELOCITY_UPDATE_METHOD)
             .def_readwrite_static("ENUM_PBF_FIRST_ORDER", &SPH::TimeStepPBF::ENUM_PBF_FIRST_ORDER)
             .def_readwrite_static("ENUM_PBF_SECOND_ORDER", &SPH::TimeStepPBF::ENUM_PBF_SECOND_ORDER)
