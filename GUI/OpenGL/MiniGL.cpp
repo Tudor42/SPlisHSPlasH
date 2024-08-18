@@ -487,9 +487,10 @@ void MiniGL::init(const int width, const int height, const char *name, const boo
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
 
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
 	if (maximized)
 		glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
