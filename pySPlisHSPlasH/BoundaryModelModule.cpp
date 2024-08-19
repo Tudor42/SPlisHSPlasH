@@ -64,8 +64,10 @@ void BoundaryModelModule(py::module m_sub){
             .def("setPosition0", &SPH::BoundaryModel_Akinci2012::setPosition0)
             // .def("getPosition", (Vector3r& (SPH::BoundaryModel_Akinci2012::*)(const unsigned int))(&SPH::BoundaryModel_Akinci2012::getPosition)) TODO: wont work by reference
             .def("getPosition", (const Vector3r& (SPH::BoundaryModel_Akinci2012::*)(const unsigned int) const)(&SPH::BoundaryModel_Akinci2012::getPosition))
+            .def("getPositions", &SPH::BoundaryModel_Akinci2012::getPositions)
             .def("setPosition", &SPH::BoundaryModel_Akinci2012::setPosition)
             // .def("getVelocity", (Vector3r& (SPH::BoundaryModel_Akinci2012::*)(const unsigned int))(&SPH::BoundaryModel_Akinci2012::getVelocity)) // TODO: wont work by reference
+            .def("getVelocities", &SPH::BoundaryModel_Akinci2012::getVelocities)
             .def("getVelocity", (const Vector3r& (SPH::BoundaryModel_Akinci2012::*)(const unsigned int) const)(&SPH::BoundaryModel_Akinci2012::getVelocity))
             .def("setVelocity", &SPH::BoundaryModel_Akinci2012::setVelocity)
             // .def("getVolume", (Real& (SPH::BoundaryModel_Akinci2012::*)(const unsigned int))(&SPH::BoundaryModel_Akinci2012::getVolume)) // TODO: might work by reference, but not intended behaviour. Use setter instead

@@ -177,7 +177,8 @@ void FluidModelModule(py::module m_sub){
 		// .def("getPosition0", (Vector3r& (SPH::FluidModel::*)(const unsigned int))(&SPH::FluidModel::getPosition0)) // TODO: wont work by reference
 		.def("getPosition0", (const Vector3r& (SPH::FluidModel::*)(const unsigned int)const)(&SPH::FluidModel::getPosition0))
 		.def("setPosition0", &SPH::FluidModel::setPosition0)
-
+		.def("getPositions", &SPH::FluidModel::getPositions)
+		.def("getVelocities", &SPH::FluidModel::getVelocities)
 		// .def("getPosition", (Vector3r& (SPH::FluidModel::*)(const unsigned int))(&SPH::FluidModel::getPosition)) // TODO: wont work by reference
 		.def("getPosition", (const Vector3r& (SPH::FluidModel::*)(const unsigned int)const)(&SPH::FluidModel::getPosition))
 		.def("setPosition", &SPH::FluidModel::setPosition)

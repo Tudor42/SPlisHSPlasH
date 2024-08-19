@@ -51,6 +51,9 @@ namespace SPH
 
 			void initModel(RigidBodyObject *rbo, const unsigned int numBoundaryParticles, Vector3r *boundaryParticles);
 			
+			std::vector<Vector3r> &getPositions() { return m_x; }
+			std::vector<Vector3r> &getVelocities() { return m_v; }
+
 			FORCE_INLINE Vector3r &getPosition0(const unsigned int i)
 			{
 				return m_x0[i];

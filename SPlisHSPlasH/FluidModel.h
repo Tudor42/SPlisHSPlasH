@@ -243,6 +243,10 @@ namespace SPH
 			inline std::vector<unsigned int>& get_precomputed_indices_same_phase() { return m_precompIndicesSamePhase; }
 #endif
 
+			std::vector<Vector3r> &getPositions() { return m_x; }
+			std::vector<Vector3r> &getVelocities() { return m_v; }
+
+
 			FORCE_INLINE Vector3r &getPosition0(const unsigned int i)
 			{
 				return m_x0[i];
