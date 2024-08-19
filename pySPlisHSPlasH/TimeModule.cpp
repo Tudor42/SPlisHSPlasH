@@ -94,6 +94,10 @@ void TimeModule(py::module m_sub) {
 
     py::class_<SPH::TimeStep, PyTimeStep, std::shared_ptr<SPH::TimeStep>>(m_sub, "TimeStep")
         .def(py::init<>())
+        .def_readwrite_static("SOLVER_ITERATIONS", &SPH::TimeStep::SOLVER_ITERATIONS)
+        .def_readwrite_static("MIN_ITERATIONS", &SPH::TimeStep::MIN_ITERATIONS)
+        .def_readwrite_static("MAX_ITERATIONS", &SPH::TimeStep::MAX_ITERATIONS)
+        .def_readwrite_static("MAX_ERROR", &SPH::TimeStep::MAX_ERROR)
         .def("initParameters", &PublicistTimeStep::initParameters)
         .def("step", &SPH::TimeStep::step)
         .def("reset", &SPH::TimeStep::reset)

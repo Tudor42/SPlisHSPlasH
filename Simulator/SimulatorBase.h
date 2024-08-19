@@ -33,7 +33,7 @@ namespace SPH
 			std::string m_key;
 			std::string m_name;
 			std::string m_description;
-			ExporterBase* m_exporter;
+			std::shared_ptr<ExporterBase> m_exporter;
 			int m_id;
 		};
 
@@ -222,10 +222,10 @@ namespace SPH
 		void setGui(SPH::Simulator_GUI_Base * val) { m_gui = val; }
 		bool isStaticScene() const { return m_isStaticScene; }
 
-		void addParticleExporter(const std::string& key, const std::string& name, const std::string& description, ExporterBase* exporter) { m_particleExporters.push_back({ key, name, description, exporter, -1 }); }
+		void addParticleExporter(const std::string& key, const std::string& name, const std::string& description, std::shared_ptr<ExporterBase> exporter) { m_particleExporters.push_back({ key, name, description, exporter, -1 }); }
 		std::vector<Exporter>& getParticleExporters() { return m_particleExporters; }
 
-		void addRigidBodyExporter(const std::string& key, const std::string& name, const std::string& description, ExporterBase* exporter) { m_rbExporters.push_back({ key, name, description, exporter, -1 }); }
+		void addRigidBodyExporter(const std::string& key, const std::string& name, const std::string& description, std::shared_ptr<ExporterBase> exporter) { m_rbExporters.push_back({ key, name, description, exporter, -1 }); }
 		std::vector<Exporter>& getRigidBodyExporters() { return m_rbExporters; }
 
 		void activateExporter(const std::string& exporterName, const bool active);

@@ -777,11 +777,7 @@ void SimulatorBase::setCommandLineParameter(GenParam::ParameterObject *paramObj)
 
 void SimulatorBase::cleanupExporters()
 {
-	for (size_t i = 0; i < m_particleExporters.size(); i++)
-		delete m_particleExporters[i].m_exporter;
 	m_particleExporters.clear();
-	for (size_t i = 0; i < m_rbExporters.size(); i++)
-		delete m_rbExporters[i].m_exporter;
 	m_rbExporters.clear();
 }
 

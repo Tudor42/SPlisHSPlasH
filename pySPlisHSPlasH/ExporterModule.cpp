@@ -24,7 +24,7 @@ void ExporterModule(py::module m_sub) {
     // ---------------------------------------
     // Exporter Base
     // ---------------------------------------
-    py::class_<SPH::ExporterBase, pyExporterBase>(m_sub, "ExporterBase")
+    py::class_<SPH::ExporterBase, pyExporterBase, std::shared_ptr<SPH::ExporterBase>>(m_sub, "ExporterBase")
         .def(py::init<SPH::SimulatorBase*>())
         .def("step", &SPH::ExporterBase::step)
         .def("reset", &SPH::ExporterBase::reset)
