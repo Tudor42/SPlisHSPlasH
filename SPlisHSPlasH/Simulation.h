@@ -391,7 +391,8 @@ namespace SPH
 
 		bool is2DSimulation() { return m_sim2D; }
 		bool zSortEnabled() { return m_enableZSort; }
-
+		void enableZSort() { m_enableZSort = true; }
+		void disableZSort() { m_enableZSort = false; } 
 		unsigned int stepsPerZSort() { return m_stepsPerZSort; }
 
 		void initKernels();

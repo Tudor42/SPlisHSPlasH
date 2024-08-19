@@ -175,6 +175,8 @@ void SimulationModule(py::module m_sub){
             .def("getTimeStep", &SPH::Simulation::getTimeStep, py::return_value_policy::reference_internal) // TODO: This returns abstract class pointer, figure out what to do with it
             .def("is2DSimulation", &SPH::Simulation::is2DSimulation)
             .def("zSortEnabled", &SPH::Simulation::zSortEnabled)
+            .def("enableZSort", &SPH::Simulation::enableZSort)
+            .def("disableZSort", &SPH::Simulation::disableZSort)
             .def("setParticleRadius", &SPH::Simulation::setParticleRadius)
             .def("getParticleRadius", &SPH::Simulation::getParticleRadius)
             .def("getSupportRadius", &SPH::Simulation::getSupportRadius)

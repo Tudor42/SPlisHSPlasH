@@ -80,7 +80,7 @@ Simulation::Simulation ()
 
 	m_simulationIsInitialized = false;
 	m_sim2D = false;
-	m_enableZSort = true;
+	m_enableZSort = false;
 	m_stepsPerZSort = 500;
 	m_counter = 0;
 
