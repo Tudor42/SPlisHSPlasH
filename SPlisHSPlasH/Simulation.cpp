@@ -112,6 +112,7 @@ Simulation* Simulation::getCurrent ()
 {
 	if (current == nullptr)
 	{
+		LOG_INFO<<"NEW SIMULATION OBJECT CREATED";
 		current = new Simulation ();
 	}
 	return current;

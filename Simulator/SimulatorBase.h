@@ -88,6 +88,7 @@ namespace SPH
 		std::vector<Exporter> m_particleExporters;
 		std::vector<Exporter> m_rbExporters;
 		bool m_updateGUI;
+		std::shared_ptr<Utilities::ConsoleSink> logger;
 #ifdef DL_OUTPUT
 		Real m_nextTiming;
 #endif
@@ -134,7 +135,7 @@ namespace SPH
 		SimulatorBase();
 		SimulatorBase(const SimulatorBase&) = delete;
         SimulatorBase& operator=(const SimulatorBase&) = delete;
-		virtual ~SimulatorBase();
+		virtual ~SimulatorBase() { Utilities::logger.removeSink(logger); }
 
 		virtual void initParameters();
 

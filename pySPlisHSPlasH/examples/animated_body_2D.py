@@ -68,8 +68,8 @@ def main():
 
     sim = sph.Simulation.getCurrent()
     sim.setValueInt(sim.BOUNDARY_HANDLING_METHOD, 0)
-    timeStep = MyTimeStep()
-    sim.setTimeStep(timeStep)
+    #timeStep = MyTimeStep()
+    #sim.setTimeStep(timeStep)
     base.runSimulation()
     base.cleanup()
 

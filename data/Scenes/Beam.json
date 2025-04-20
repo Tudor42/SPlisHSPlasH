@@ -1,51 +1,131 @@
 {
-	"Configuration": 
-	{
-		"timeStepSize": 0.002,
-		"particleRadius": 0.025,
-		"numberOfStepsPerRenderUpdate": 1,
-		"density0": 1000, 
-		"simulationMethod": 0,
-		"gravitation": [0,-9.81,0], 
-		"cflMethod": 0, 
-		"cflFactor": 1,
-		"cflMaxTimeStepSize": 0.005,
-		"maxIterations": 100,
-		"maxError": 0.01,
-		"maxIterationsV": 100,
-		"maxErrorV": 0.1,		
-		"stiffness": 0,
-		"exponent": 1,
-		"velocityUpdateMethod": 0,
-		"enableDivergenceSolver": true,
-		"enableZSort": true,
-		"boundaryHandlingMethod": 2,
-		"enablePartioExport": false
-	},
-	"Materials": [
-		{
-			"id": "Fluid",
-			"elasticityMethod": 3,
-			"viscosity": 0.01,
-			"viscosityMethod": 1,
-			"surfaceTension": 0.02,
-			"surfaceTensionMethod": 0,
-			"youngsModulus": 5000000.0,
-			"poissonsRatio": 0.33, 
-			"alpha": 0.1,
-			"maxNeighbors": 15,
-			"fixedBoxMin" : [-10,-10,-10], 
-			"fixedBoxMax" : [-1.5,10,10]
-		}
-	],
-	"FluidModels": [
-		{
-			"particleFile": "../models/beam_r_0.025.bgeo",
-			"translation": [0,0.5,0],
-			"scale": [1, 1, 1]
-		}
-	]
+    "Configuration": {
+        "sim2D": true,
+        "particleRadius": 0.025,
+        "colorMapType": 1,
+        "simulationMethod": 4,
+        "gravitation": [
+            0,
+            -9.81,
+            0
+        ],
+        "maxIterations": 100,
+        "maxError": 0.1,
+        "maxIterationsV": 100,
+        "maxErrorV": 0.1,
+        "enableDivergenceSolver": true,
+        "boundaryHandlingMethod": 0
+    },
+    "Materials": [
+        {
+            "id": "Fluid",
+            "surfaceTension": 0.2,
+            "surfaceTensionMethod": 1,
+            "vorticityMethod": 1,
+            "vorticity": 0.1,
+            "colorMapType": 1
+        }
+    ],
+    "RigidBodies": [
+        {
+            "geometryFile": "../models/UnitBox.obj",
+            "translation": [
+                0,
+                2.0,
+                0
+            ],
+            "rotationAxis": [
+                1,
+                0,
+                0
+            ],
+            "rotationAngle": 0,
+            "scale": [
+                8,
+                4,
+                1
+            ],
+            "color": [
+                0.1,
+                0.4,
+                0.6,
+                1.0
+            ],
+            "isDynamic": false,
+            "isWall": true,
+            "mapInvert": true,
+            "mapThickness": 0.0,
+            "mapResolution": [
+                30,
+                30,
+                20
+            ]
+        }
+    ],
+    "FluidBlocks": [
+        {
+            "start": [
+                -4.0,
+                0.0,
+                -1
+            ],
+            "end": [
+                -2.5,
+                1.5,
+                1
+            ],
+            "translation": [
+                1.439473264089043,
+                0.46118283781272973,
+                0.0
+            ],
+            "scale": [
+                1,
+                1.884908433478702,
+                1
+            ],
+            "scaleY-random-range": [
+                1,
+                2
+            ],
+            "translationX-random-range": [
+                0.025,
+                2
+            ],
+            "translationY-random-range": [
+                0.025,
+                1
+            ]
+        },
+        {
+            "start": [
+                0.0,
+                0.0,
+                -1
+            ],
+            "end": [
+                2.5,
+                1.5,
+                1
+            ],
+            "translation": [
+                1,
+                0.025,
+                0.0
+            ],
+            "scale": [
+                1,
+                1.9089141915109464,
+                1
+            ],
+            "scaleY-random-range": [
+                1,
+                2
+            ],
+            "ranslationX-random-range": [
+                0.025,
+                1
+            ]
+        }
+    ]
 }
-
-
-

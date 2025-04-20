@@ -65,7 +65,8 @@ int SimulatorBase::CAMERA_LOOKAT = -1;
  
 SimulatorBase::SimulatorBase()
 {
-	Utilities::logger.addSink(shared_ptr<Utilities::ConsoleSink>(new Utilities::ConsoleSink(Utilities::LogLevel::INFO)));
+	logger = shared_ptr<Utilities::ConsoleSink>(new Utilities::ConsoleSink(Utilities::LogLevel::INFO))
+	Utilities::logger.addSink(logger);
 
 	m_boundarySimulator = nullptr;
 	m_gui = nullptr;
@@ -231,6 +232,7 @@ void SimulatorBase::init(std::vector<std::string> argv, const std::string &windo
 
 void SimulatorBase::init(int argc, char **argv, const std::string &windowName)
 {
+	std::cout<<"INITILIAZED"<<std::endl;
 	m_argc = argc;
 	m_argv = argv;
 	m_windowName = windowName;
